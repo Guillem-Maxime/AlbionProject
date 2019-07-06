@@ -1,63 +1,61 @@
 #pragma once
 
+#include "Utils/crtp.h"
+
 template<class Derived>
-class Stockable
+struct TStockable : TCrtp<Derived, TStockable>
 {
 public:
-    int GetAmount() const { return m_Amount; }
-    void SetAmount(const int value) 
-    { 
-        m_Amount = value;
-        CheckAmount();
+    int TStockable_GetAmount() const { return this->Underlying().GetAmount(); }
+    int TStockable_GetMaxAmount()
+    {
+        return this->Underlying().GetMaxAmount();
+    }
+    void TStockable_SetAmount(const int value)
+    {
+        this->Underlying().SetValue(value);
+        TStockable_CheckAmount();
     }
 
-    void AddAmount(const int value) { SetAmount(m_Amount + value); }
-    void RemoveAmount(const int value) { SetAmount(m_Amount - value); }
+    void TStockable_AddAmount(const int value) { TStockable_SetAmount(TStockable_GetAmount() + value); }
+    void TStockable_RemoveAmount(const int value) { TStockable_SetAmount(TStockable_GetAmount() - value); }
 
-    int GetMaxAmount()
+    void TStockable_GiveToStock(TStockable& stock)
     {
-        Derived& derived = static_cast<Derived&>(*this);
-        return derived.GetMaxAmount();
+        const int maxAmount{ stock.TStockable_GetMaxAmount() };
+        stock.TStockable_AddAmount(TStockable_GetAmount());
+
+        const int newStockAmount{ TStockable_GetAmount()() + stock.TStockable_GetAmount()() };
+        TStockable_SetAmount(maxAmount - newStockAmount);
+        TStockable_CheckAmount();
     }
 
-    void GiveToStock(Stockable& stock)
+    void TStockable_TakeFromStock(TStockable& stock, const int amountToGet)
     {
-        const int maxAmount{ stock.GetMaxAmount() };
-        stock.AddAmount(m_Amount);
-
-        const int newStockAmount{ GetAmount() + stock.GetAmount() };
-        SetAmount(maxAmount - newStockAmount);
-        CheckAmount();
-    }
-
-    void TakeFromStock(Stockable& stock, const int amountToGet)
-    {
-        const int stockAmount{ stock.GetAmount() };
+        const int stockAmount{ stock.TStockable_GetAmount()() };
         if (stockAmount > amountToGet)
         {
-            SetAmount(amountToGet);
-            stock.RemoveAmount(amountToGet);
+            TStockable_SetAmount(amountToGet);
+            stock.TStockable_RemoveAmount(amountToGet);
         }
     }
 
 private:
-    int m_Amount{ 1 };
 
-    void CheckAmount()
+    void TStockable_CheckAmount()
     {
-        if (m_Amount < 1)
+        if (TStockable_GetAmount < 1)
         {
-            Derived& derived = static_cast<Derived&>(*this);
-            derived.RequestDestroy();
+            this->Underlying().RequestDestroy();
         }
 
-        const int maxAmount{ GetMaxAmount() };
-        if (m_Amount > maxAmount)
+        const int maxAmount{ TStockable_GetMaxAmount() };
+        if (TStockable_GetAmount > maxAmount)
         {
-            m_Amount = maxAmount;
+            this->Underlying().SetValue(value);
         }
     }
 
-    Stockable() {}
+    TStockable() {}
     friend Derived;
 };
