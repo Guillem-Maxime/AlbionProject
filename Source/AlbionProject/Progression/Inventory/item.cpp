@@ -1,6 +1,12 @@
 #include "Progression/Inventory/Item.h"
 
-void Item::RequestDestroy()
+UItem::UItem(const FObjectInitializer& ObjectInitializer)
+    : m_MaxAmount(99)
+    , m_Amount(0)
+{
+}
+
+void UItem::RequestDestroy()
 {
     
 }
