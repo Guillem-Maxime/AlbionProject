@@ -1,17 +1,17 @@
 #include "Progression/Inventory/slotitemcontainer.h"
 
-SlotItemContainer::SlotItemContainer()
+USlotItemContainer::USlotItemContainer(const FObjectInitializer& ObjectInitializer)
     : m_Item(nullptr)
 {
 }
 
-void SlotItemContainer::GiveItem(UItem*& value)
+void USlotItemContainer::GiveItem(UItem*& value)
 { 
     m_Item = value;
     value = nullptr;
 }
 
-UItem* SlotItemContainer::TakeItem()
+UItem* USlotItemContainer::TakeItem()
 {
     UItem* tmp{ m_Item };
     m_Item = nullptr;

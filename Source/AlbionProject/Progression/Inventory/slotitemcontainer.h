@@ -3,11 +3,15 @@
 #include "Progression/Inventory/item.h"
 #include "Utils/notcopyable.h"
 
-class SlotItemContainer : public TNotCopyable<SlotItemContainer>
+#include "slotitemcontainer.generated.h"
+
+UCLASS()
+class USlotItemContainer : public UObject, public TNotCopyable<USlotItemContainer>
 {
+    GENERATED_UCLASS_BODY()
+
 public:
-    SlotItemContainer();
-    ~SlotItemContainer() {}
+    USlotItemContainer();
 
     inline const UItem* GetItemView() const { return m_Item; }
     inline bool IsEmpty() const { return m_Item == nullptr; }
@@ -16,5 +20,6 @@ public:
     UItem* TakeItem();
 
 private:
+    UPROPERTY()
     UItem* m_Item;
 };

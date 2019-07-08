@@ -1,7 +1,29 @@
 #include "Progression/Inventory/stockcontainer.h"
 
-StockContainer::StockContainer(const int numberOfSlots)
+UStockContainer::UStockContainer(const FObjectInitializer& ObjectInitializer)
+    : m_NumberOfSlots(5)
+{
+    m_ItemSlots.Reserve(m_NumberOfSlots);
+    for (int32 i{ 0 }; i < m_NumberOfSlots; i++)
+    {
+        FString Name{ "StockContainer" };
+        Name.AppendInt(i);
+
+        USlotItemContainer* slot{ NewObject<USlotItemContainer>(this, FName(*Name)) };
+        m_ItemSlots.Add(slot);
+    }
+}
+
+UStockContainer::UStockContainer(const int32 numberOfSlots)
     : m_NumberOfSlots(numberOfSlots)
 {
-    m_Items.Reserve(m_NumberOfSlots);
+    m_ItemSlots.Reserve(m_NumberOfSlots);
+    for (int32 i{ 0 }; i < m_NumberOfSlots; i++)
+    {
+        FString Name{ "StockContainer" };
+        Name.AppendInt(i);
+
+        USlotItemContainer* slot{ NewObject<USlotItemContainer>(this, FName(*Name)) };
+        m_ItemSlots.Add(slot);
+    }
 }

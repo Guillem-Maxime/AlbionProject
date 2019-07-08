@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Runtime/CoreUObject/Public/UObject/Object.h"
-
 #include "Utils/stockable.h"
 
 #include "item.generated.h"
