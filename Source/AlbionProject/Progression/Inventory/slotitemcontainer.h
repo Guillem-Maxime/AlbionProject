@@ -7,12 +7,12 @@ class SlotItemContainer : public TNotCopyable<SlotItemContainer>
 {
 public:
     SlotItemContainer();
-    SlotItemContainer(UItem* item);
     ~SlotItemContainer() {}
 
-    UItem* GetItem() { return m_Item; }
-    const UItem* GetItem() const { return m_Item; }
-    void SetItem(UItem* value) { m_Item = value; }
+    inline const UItem* GetItemView() const { return m_Item; }
+    
+    void GiveItem(UItem*& value);
+    UItem* TakeItem();
 
 private:
     UItem* m_Item;

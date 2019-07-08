@@ -3,11 +3,17 @@
 SlotItemContainer::SlotItemContainer()
     : m_Item(nullptr)
 {
-
 }
 
-SlotItemContainer::SlotItemContainer(UItem* item)
-    : m_Item(item)
-{
+void SlotItemContainer::GiveItem(UItem*& value)
+{ 
+    m_Item = value;
+    value = nullptr;
+}
 
+UItem* SlotItemContainer::TakeItem()
+{
+    UItem* tmp{ m_Item };
+    m_Item = nullptr;
+    return tmp;
 }
