@@ -10,7 +10,8 @@ public:
     ~SlotItemContainer() {}
 
     inline const UItem* GetItemView() const { return m_Item; }
-    
+    inline bool IsEmpty() const { return m_Item == nullptr; }
+
     void GiveItem(UItem*& value);
     UItem* TakeItem();
 
