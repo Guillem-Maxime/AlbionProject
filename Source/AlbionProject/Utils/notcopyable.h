@@ -1,8 +1,10 @@
 #pragma once
 
-template<class T>
-struct TNotCopyable
+#include "Utils/crtp.h"
+
+template<class Derived>
+struct TNotCopyable : TCrtp<Derived, TNotCopyable>
 {
-    T& operator=(const T& other) = delete;
-    T(const T& other) = delete;
-}
+    TNotCopyable(const TNotCopyable& other) = delete;
+    Derived& operator=(const Derived& other) = delete;
+};
