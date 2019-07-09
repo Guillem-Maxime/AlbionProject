@@ -1,11 +1,13 @@
 #pragma once
 
-#include "Progression/Inventory/slotitemcontainer.h"
 #include "Utils/notcopyable.h"
 
 #include "stockcontainer.generated.h"
 
 enum class EItemType : uint8;
+
+class UItem;
+class USlotItemContainer;
 
 UCLASS()
 class UStockContainer : public UObject, public TNotCopyable<UStockContainer>
@@ -16,6 +18,7 @@ public:
     UStockContainer(const int32 numberOfSlots);
 
     void AddToContainer(UItem& item);
+    void OnSlotEmptied();
 
 private:
     UPROPERTY()

@@ -1,5 +1,8 @@
 #include "Progression/Inventory/stockcontainer.h"
 
+#include "Progression/Inventory/item.h"
+#include "Progression/Inventory/slotitemcontainer.h"
+
 UStockContainer::UStockContainer(const FObjectInitializer& ObjectInitializer)
     : m_NumberOfSlots(5)
 {
@@ -10,6 +13,7 @@ UStockContainer::UStockContainer(const FObjectInitializer& ObjectInitializer)
         Name.AppendInt(i);
 
         USlotItemContainer* slot{ NewObject<USlotItemContainer>(this, FName(*Name)) };
+        slot->SetStockContainer(this);
         m_ItemSlots.Add(slot);
     }
     SetNextEmptySlot();
@@ -30,12 +34,6 @@ UStockContainer::UStockContainer(const int32 numberOfSlots)
     SetNextEmptySlot();
 }
 
-USlotItemContainer* UStockContainer::FindNextAvailableSlotByType(EItemType itemType)
-{
-    const auto closure = [itemType](USlotItemContainer*& slotItem) { return (slotItem->GetItemType() == itemType) && (!slotItem->IsStockFull()); };
-    return *m_ItemSlots.FindByPredicate(closure);
-}
-
 void UStockContainer::AddToContainer(UItem& item)
 {
     USlotItemContainer* slotItemContainer{ FindNextAvailableSlotByType(item.GetItemType()) };
@@ -49,15 +47,26 @@ void UStockContainer::AddToContainer(UItem& item)
     }
 }
 
+void UStockContainer::OnSlotEmptied()
+{
+    SetNextEmptySlot();
+}
+
+USlotItemContainer* UStockContainer::FindNextAvailableSlotByType(EItemType itemType)
+{
+    const auto closure = [itemType](USlotItemContainer*& slotItem) { return (slotItem->GetItemType() == itemType) && (!slotItem->IsStockFull()); };
+    return *m_ItemSlots.FindByPredicate(closure);
+}
+
 void UStockContainer::AddToEmptySlot(UItem& item)
 {
-    m_NextEmptySlot->GiveItem(item);
+    m_NextEmptySlot->TakeItem(item);
     SetNextEmptySlot();
 }
 
 void UStockContainer::SetNextEmptySlot()
 {
-    const auto closure = [](USlotItemContainer*& slotItem) { return slotItem->GetItemView() == nullptr; };
+    const auto closure = [](USlotItemContainer*& slotItem) { return slotItem->GetItem() == nullptr; };
     USlotItemContainer* foundSlot{ *m_ItemSlots.FindByPredicate(closure) };
     m_NextEmptySlot = foundSlot;
 }

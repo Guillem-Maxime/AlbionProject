@@ -1,9 +1,13 @@
 #pragma once
 
-#include "Progression/Inventory/item.h"
 #include "Utils/notcopyable.h"
 
 #include "slotitemcontainer.generated.h"
+
+class UItem;
+class UStockContainer;
+
+enum class EItemType : uint8;
 
 UCLASS()
 class USlotItemContainer : public UObject, public TNotCopyable<USlotItemContainer>
@@ -13,18 +17,26 @@ class USlotItemContainer : public UObject, public TNotCopyable<USlotItemContaine
 public:
     USlotItemContainer();
 
-    inline const UItem* GetItemView() const { return m_Item; }
+    inline const UItem* GetItem() const { return m_Item; }
     inline bool IsEmpty() const { return m_Item == nullptr; }
-    inline EItemType GetItemType() const { return m_Item->GetItemType(); }
+    EItemType GetItemType() const;
+
+    inline const UStockContainer* GetStockContainer() const { return m_StockContainer; }
+    inline UStockContainer* GetStockContainer() { return m_StockContainer; }
+    inline void SetStockContainer(UStockContainer* stockContainer) { m_StockContainer = stockContainer; }
 
     bool IsStockFull() const;
     void GiveToStock(UItem& item);
     void TakeFromStock(UItem& item);
 
-    void GiveItem(UItem& value);
-    UItem& TakeItem();
+    void TakeItem(UItem& value);
+    UItem* GiveItem();
 
 private:
     UPROPERTY()
+    UStockContainer* m_StockContainer;
+    UPROPERTY()
     UItem* m_Item;
+
+    void EmptySlot();
 };
