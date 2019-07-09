@@ -2,4 +2,4 @@
 
 #include <string>
 
-std::string StringFormat(const char* str, ...);
+const char* StringFormat(const char* str, ...);

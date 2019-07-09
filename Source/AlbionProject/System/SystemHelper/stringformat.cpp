@@ -3,9 +3,7 @@
 #include <memory>
 #include <cstdarg>
 
-#include "arrayhelper.h"
-
-std::string StringFormat(const char* str, ...)
+const char* StringFormat(const char* str, ...)
 {
     char buffer[256];
 

@@ -2,18 +2,23 @@
 
 #include <iostream>
 #include <cassert>
+#include <sstream>
 
 #include "System/Log/Log.h"
 #include "System/SystemHelper/stringformat.h"
 
-void StopIntoDebugger(ELogChannel channel, char* file, int32 line)
+void StopIntoDebugger(ELogChannel channel, const char* file, int line)
 {
-    LogError( StringFormat("Assert in %s(%d).", file, line), channel);
+    std::ostringstream strStream{};
+    strStream << "Assert in " << file << "(" << line << ")." << std::endl;
+    LogError(strStream.str(), channel);
     assert(false);
 }
 
-void PauseIntoDebugger(char* message, ELogChannel channel, char* file, int32 line)
+void PauseIntoDebugger(const char* message, ELogChannel channel, const char* file, int line)
 {
-    LogError( StringFormat("SoftAssert in %s(%d) %s.", file, line, message), channel);
+    std::ostringstream strStream{};
+    strStream << "SoftAssert in " << file << "(" << line << ") " << message << std::endl;
+    LogError( strStream.str(), channel);
     __debugbreak();
 }

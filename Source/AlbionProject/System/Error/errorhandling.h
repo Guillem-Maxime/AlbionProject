@@ -10,9 +10,9 @@ enum class ELogChannel;
 
 #define SoftAssert(expr, channel, message) if(!(expr)) { PauseIntoDebugger(message, channel, __FILE__, __LINE__); }
 
-void StopIntoDebugger(ELogChannel channel, std::string file, int32 line);
+void StopIntoDebugger(ELogChannel channel, const char* file, int line);
 
-void PauseIntoDebugger(std::string message, ELogChannel channel, std::string file, int line);
+void PauseIntoDebugger(const char* message, ELogChannel channel, const char* file, int line);
 
 #else
 
