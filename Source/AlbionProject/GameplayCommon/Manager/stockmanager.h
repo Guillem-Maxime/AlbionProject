@@ -1,7 +1,5 @@
 #pragma once
 
-//#include "stockmanager.generated.h"
-
 class UStockContainer;
 
 class StockManager

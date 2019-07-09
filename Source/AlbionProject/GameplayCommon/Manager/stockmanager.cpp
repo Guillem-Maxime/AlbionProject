@@ -1,4 +1,4 @@
-#include "Progression/Inventory/stockmanager.h"
+#include "GameplayCommon/Manager/stockmanager.h"
 
 void StockManager::RegisterContainer(UStockContainer* container)
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Progression/Inventory/stockcontainer.h"
+#include "GameplayCommon/Progression/Inventory/stockcontainer.h"
 
 #include "inventorycomponent.generated.h"
 

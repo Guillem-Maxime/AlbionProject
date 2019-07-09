@@ -1,4 +1,4 @@
-#include "Progression/Inventory/Item.h"
+#include "GameplayCommon/Progression/Inventory/Item.h"
 
 UItem::UItem(const FObjectInitializer& ObjectInitializer)
     : m_MaxAmount(99)

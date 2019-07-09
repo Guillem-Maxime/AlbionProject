@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Utils/crtp.h"
+#include "GameplayCommon/Utils/crtp.h"
 
 template<class Derived>
 struct TNotCopyable : TCrtp<Derived, TNotCopyable>

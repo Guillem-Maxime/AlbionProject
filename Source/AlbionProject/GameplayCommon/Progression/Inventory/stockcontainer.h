@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Utils/notcopyable.h"
+#include "GameplayCommon/Utils/notcopyable.h"
 
 #include "stockcontainer.generated.h"
 

@@ -1,7 +1,7 @@
-#include "Progression/Inventory/stockcontainer.h"
+#include "GameplayCommon/Progression/Inventory/stockcontainer.h"
 
-#include "Progression/Inventory/item.h"
-#include "Progression/Inventory/slotitemcontainer.h"
+#include "GameplayCommon/Progression/Inventory/item.h"
+#include "GameplayCommon/Progression/Inventory/slotitemcontainer.h"
 
 UStockContainer::UStockContainer(const FObjectInitializer& ObjectInitializer)
     : m_NumberOfSlots(5)

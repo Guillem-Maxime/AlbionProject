@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Progression/Inventory/itemtype.h"
-#include "Utils/stockable.h"
+#include "GameplayCommon/Progression/Inventory/itemtype.h"
+#include "GameplayCommon/Utils/stockable.h"
 
 #include "item.generated.h"
 

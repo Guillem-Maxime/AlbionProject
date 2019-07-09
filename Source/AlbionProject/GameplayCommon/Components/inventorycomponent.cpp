@@ -1,4 +1,4 @@
-#include "Components/inventorycomponent.h"
+#include "GameplayCommon/Components/inventorycomponent.h"
 
 UInventoryComponent::UInventoryComponent(const FObjectInitializer& ObjectInitializer)
 {
@@ -6,5 +6,5 @@ UInventoryComponent::UInventoryComponent(const FObjectInitializer& ObjectInitial
 
 void UInventoryComponent::OnRegister()
 {
-    ManagerFactory::GetManager<StockManager>()->RegisterContainer(&m_StockContainer);
+    //ManagerFactory::GetManager<StockManager>()->RegisterContainer(&m_StockContainer);
 }
