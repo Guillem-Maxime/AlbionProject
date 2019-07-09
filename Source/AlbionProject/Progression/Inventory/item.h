@@ -32,7 +32,6 @@ private:
     void SetMaxAmount(const int value) { m_MaxAmount = value; }
     int GetAmount() const { return m_Amount; }
     void SetAmount(const int value) { m_Amount = value; }
-    void OnStockEmpty();
 
     friend TStockable<UItem>;
 };

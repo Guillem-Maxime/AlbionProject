@@ -6,8 +6,3 @@ UItem::UItem(const FObjectInitializer& ObjectInitializer)
     , m_ItemType(EItemType::ET_Invalid)
 {
 }
-
-void UItem::OnStockEmpty()
-{
-    
-}

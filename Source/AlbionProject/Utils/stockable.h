@@ -34,7 +34,6 @@ void TStockable<Derived>::TStockable_SetAmount(const int32 value)
     if (value <= 0)
     {
         thisUnderlying.SetAmount(0);
-        thisUnderlying.OnStockEmpty();
     }
 
     const int maxAmount{ TStockable_GetMaxAmount() };
