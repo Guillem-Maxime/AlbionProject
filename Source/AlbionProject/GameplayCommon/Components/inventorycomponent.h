@@ -9,9 +9,8 @@ class UInventoryComponent : public UActorComponent
 {
     GENERATED_UCLASS_BODY()
 public:
-
+    virtual void OnRegister() override;
 
 private:
     UStockContainer m_StockContainer;
-
 };

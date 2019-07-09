@@ -20,6 +20,8 @@ public:
     void AddToContainer(UItem& item);
     void OnSlotEmptied();
 
+    void RegisterToStockManager();
+
 private:
     UPROPERTY()
     TArray<USlotItemContainer*> m_ItemSlots;
