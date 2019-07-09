@@ -15,9 +15,14 @@ public:
 
     inline const UItem* GetItemView() const { return m_Item; }
     inline bool IsEmpty() const { return m_Item == nullptr; }
+    inline EItemType GetItemType() const { return m_Item->GetItemType(); }
 
-    void GiveItem(UItem*& value);
-    UItem* TakeItem();
+    bool IsStockFull() const;
+    void GiveToStock(UItem& item);
+    void TakeFromStock(UItem& item);
+
+    void GiveItem(UItem& value);
+    UItem& TakeItem();
 
 private:
     UPROPERTY()

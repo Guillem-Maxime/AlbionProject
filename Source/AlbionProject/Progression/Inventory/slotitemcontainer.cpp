@@ -5,15 +5,27 @@ USlotItemContainer::USlotItemContainer(const FObjectInitializer& ObjectInitializ
 {
 }
 
-void USlotItemContainer::GiveItem(UItem*& value)
-{ 
-    m_Item = value;
-    value = nullptr;
+bool USlotItemContainer::IsStockFull() const
+{
+    return m_Item->Stockable_IsFull();
 }
 
-UItem* USlotItemContainer::TakeItem()
+void USlotItemContainer::GiveToStock(UItem& item)
 {
-    UItem* tmp{ m_Item };
-    m_Item = nullptr;
-    return tmp;
+    m_Item->TStockable_GiveToStock(item);
+}
+
+void USlotItemContainer::TakeFromStock(UItem& item)
+{
+    m_Item->TStockable_TakeFromStock(item);
+}
+
+void USlotItemContainer::GiveItem(UItem& value)
+{ 
+    m_Item = &value;
+}
+
+UItem& USlotItemContainer::TakeItem()
+{
+    return *m_Item;
 }

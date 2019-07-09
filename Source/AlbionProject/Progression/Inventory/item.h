@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Progression/Inventory/itemtype.h"
 #include "Utils/stockable.h"
 
 #include "item.generated.h"
@@ -12,9 +13,12 @@ class UItem : public UObject, public TStockable<UItem>
 public:
     UItem();
 
-
+    inline EItemType GetItemType() const { return m_ItemType; }
 
 private:
+    UPROPERTY(EditAnywhere, Category = Type)
+    EItemType m_ItemType;
+
     //Stockable member
     UPROPERTY(VisibleAnywhere, Category = Stock)
     int m_Amount;
@@ -28,5 +32,7 @@ private:
     void SetMaxAmount(const int value) { m_MaxAmount = value; }
     int GetAmount() const { return m_Amount; }
     void SetAmount(const int value) { m_Amount = value; }
-    void RequestDestroy();
+    void OnStockEmpty();
+
+    friend TStockable<UItem>;
 };
