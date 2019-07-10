@@ -3,10 +3,10 @@
 #include "GameplayCommon/Utils/unique.h"
 
 template<class T>
-struct TSingleton : TCrtp<TUnique<T>, TSingleton>
+struct TSingleton : public TUnique<T>
 {
     static T& GetInstance()
     {
-        return this->Underlying().GetUniqueInstance();
+        return static_cast<TUnique<T>>(*this).GetUniqueInstance();
     }
 };

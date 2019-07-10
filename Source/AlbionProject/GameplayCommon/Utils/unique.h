@@ -1,11 +1,9 @@
 #pragma once
 
-#include "GameplayCommon/Utils/crtp.h"
-
 #include "System/Error/errorhandling.h"
 
 template<class T>
-struct TUnique : TCrtp<T, TUnique>
+struct TUnique
 {
 public:
 
@@ -26,16 +24,7 @@ protected:
         {
             CreateUnique();
         }
-        return *(static_cast<T*> (ms_Instance));
-    }
-
-    static const T& GetUniqueInstance()
-    {
-        if (ms_Instance == nullptr)
-        {
-            CreateUnique();
-        }
-        return *(static_cast<const T*> (ms_Instance));
+        return *(static_cast<T*>(ms_Instance));
     }
 
     static void CreateUnique()

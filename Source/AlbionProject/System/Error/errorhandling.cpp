@@ -5,7 +5,6 @@
 #include <sstream>
 
 #include "System/Log/Log.h"
-#include "System/SystemHelper/stringformat.h"
 
 void StopIntoDebugger(ELogChannel channel, const char* file, int line)
 {
