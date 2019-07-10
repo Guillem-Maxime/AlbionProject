@@ -16,7 +16,7 @@ public:
     void Shutdown();
 
 private:
-    TArray<FTickableObjectBase> m_ManagerList;
+    TArray<FTickableObjectBase*> m_ManagerList;
 
     template<class ManagerName>
     void CreateManager();
