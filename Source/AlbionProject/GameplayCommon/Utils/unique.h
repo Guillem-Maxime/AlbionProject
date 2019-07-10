@@ -1,6 +1,7 @@
 #pragma once
 
 #include "System/Error/errorhandling.h"
+#include "System/Log/log.h"
 
 template<class T>
 struct TUnique
@@ -29,7 +30,7 @@ protected:
 
     static void CreateUnique()
     {
-        ASSERT(ms_Instance == nullptr, ELogChannel::LogGameplay);
+        Assert(ms_Instance == nullptr, ELogChannel::LogGameplay);
         ms_Instance = new T;
     }
 

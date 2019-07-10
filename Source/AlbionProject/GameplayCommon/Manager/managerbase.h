@@ -25,4 +25,12 @@ struct TManagerBase : public FTickableObjectBase, public TSingleton<TManagerBase
     {
         this->Underlying().Shutdown();
     }
+
+    virtual TStatId GetStatId() const
+    {
+        return m_StatId;
+    }
+
+protected:
+    TStatId m_StatId;
 };

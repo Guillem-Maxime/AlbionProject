@@ -11,8 +11,10 @@ public:
     virtual ~StockManager() {}
 
     void Init();
-    void OnTick(float deltaTime);
     void Shutdown();
+
+    //TManagerBase Interface
+    void OnTick(float deltaTime);
 
     void RegisterContainer(UStockContainer* container);
 

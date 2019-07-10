@@ -12,15 +12,15 @@ public:
     virtual ~ManagerFactory() {}
 
     void Init();
-    void OnTick(float deltaTime);
     void Shutdown();
+
+    //TManagerBase Interface
+    void OnTick(float deltaTime);
 
 private:
     TArray<FTickableObjectBase*> m_ManagerList;
+    TStatId m_StatId;
 
     template<class ManagerName>
     void CreateManager();
-    
-    template<class ManagerName>
-    void DestroyManager();
 };

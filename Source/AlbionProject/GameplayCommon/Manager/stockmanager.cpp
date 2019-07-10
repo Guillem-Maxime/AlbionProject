@@ -5,12 +5,13 @@ void StockManager::Init()
 
 }
 
-void StockManager::OnTick(float deltaTime)
+void StockManager::Shutdown()
 {
 
 }
 
-void StockManager::Shutdown()
+//TManagerBase Interface
+void StockManager::OnTick(float deltaTime)
 {
 
 }
